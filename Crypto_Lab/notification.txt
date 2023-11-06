@@ -1,0 +1,90 @@
+Main Actitivity :
+
+
+package com.example.notf;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btn = findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                notf();
+            }
+        });
+    }
+
+    private void notf()
+    {
+        String channel_id="NOTIFICATIONS";
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(getApplicationContext(),channel_id);
+        builder.setSmallIcon(R.drawable.calc_notf1);
+        builder.setContentTitle("Calculator Results");
+        builder.setContentText("Hello");
+        builder.setAutoCancel(true);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+
+        NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Example channel name and description
+            CharSequence channelName = "Calculator Results";
+            String channelDescription = "Results of operation done in the calculator app";
+
+            // Importance level: High
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            // Create a notification channel
+            NotificationChannel channel = new NotificationChannel(channel_id, channelName, importance);
+            channel.setDescription(channelDescription);
+
+
+
+            // Enable vibration for notifications
+            channel.enableVibration(true);
+
+            // Register the channel with the system
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        nm.notify(0,builder.build());
+
+    }
+
+
+}
+
+______
+
+
+calc_notf1 : 
+
+<vector android:height="24dp" android:tint="#000000"
+    android:viewportHeight="24" android:viewportWidth="24"
+    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@android:color/white" android:pathData="M12,22c1.1,0 2,-0.9 2,-2h-4c0,1.1 0.89,2 2,2zM18,16v-5c0,-3.07 -1.64,-5.64 -4.5,-6.32L13.5,4c0,-0.83 -0.67,-1.5 -1.5,-1.5s-1.5,0.67 -1.5,1.5v0.68C7.63,5.36 6,7.92 6,11v5l-2,2v1h16v-1l-2,-2z"/>
+</vector>
+
+__________
+
+

@@ -1,0 +1,65 @@
+Java  :
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn;
+    TextView txtv;
+    EditText ed1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtv = (TextView)findViewById(R.id.textView);
+        ed1 = (EditText)findViewById(R.id.Txt1);
+
+        Button btn1 = (Button)findViewById(R.id.button2);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"Button 2 is clicked",Toast.LENGTH_SHORT).show();
+                txtv.setText("hi "+ed1.getText());
+                ed1.setVisibility(View.GONE);
+            }
+        });
+    }
+    }
+
+
+
+XMl : 
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/Txt1"
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:insetLeft="10dp"
+        android:text="Button2"/>
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textView"
+        android:id="@+id/Txt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter your name" />
+
+</RelativeLayout>
